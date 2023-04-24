@@ -1,0 +1,13 @@
+{
+    "app": {
+        "port": ":8000"
+    },
+    "db": {
+        "host": "localhost",
+        "database": "receita",
+        "port": "5433",
+        "user": "postgres",
+        "pass": "16180",
+        "drive": "postgres"
+    }
+}
