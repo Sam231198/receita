@@ -14,6 +14,7 @@ func LoadControllers(server *gin.Engine) {
 	// controllers
 	receitaController := controllers.NewReceitaController(receitaRepository)
 
+	server.GET("/receita/:receitaID", receitaController.SearchReceita)
 	server.GET("/receita/lista", receitaController.ListReceita)
 	server.POST("/receita/add", receitaController.AddReceita)
 }

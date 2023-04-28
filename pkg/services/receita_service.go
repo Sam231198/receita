@@ -15,6 +15,16 @@ func NewReceitaService(receitaRepositor repository.ReceitaRepository) ReceitaSer
 	return ReceitaService{receitaRepositor}
 }
 
+func (rs ReceitaService) GetOne(id int32) core.Receita {
+	receita, err := rs.receitaRepository.FetchOne(id)
+	if err != nil {
+		fmt.Print("Error ao retornar as receitas do banco de dados: ", err.Error())
+		return core.Receita{}
+
+	}
+	return receita
+}
+
 func (rs ReceitaService) GetAll() []core.Receita {
 	receitas, err := rs.receitaRepository.FetchAll()
 	if err != nil {
