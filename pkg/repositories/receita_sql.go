@@ -23,11 +23,11 @@ func (rp ReceitaRepository) FetchOne(receitaID int32) (core.Receita, error) {
 	var rendimento string
 
 	err := row.Scan(
-			&id,
-			&nome,
-			&tempo,
-			&rendimento,
-		)
+		&id,
+		&nome,
+		&tempo,
+		&rendimento,
+	)
 
 	if err != nil {
 		return core.Receita{}, err
@@ -75,7 +75,7 @@ func (rp ReceitaRepository) FetchAll() ([]core.Receita, error) {
 
 func (rp ReceitaRepository) Insert(receita core.Receita) (int32, error) {
 	row := rp.db.QueryRow(`INSERT INTO receitas (nome, tempo, rendimento) VALUES ($1,$2,$3) RETURNING id`,
-		receita.Nome.rstrip(' ').lstrip(' '), receita.Tempo, receita.Rendimento) 
+		receita.Nome, receita.Tempo, receita.Rendimento)
 
 	var id int32
 	err := row.Scan(&id)

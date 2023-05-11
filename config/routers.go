@@ -11,10 +11,16 @@ func LoadControllers(server *gin.Engine) {
 
 	// repositories
 	receitaRepository := repositories.NewReceitaRepository(db)
+	ingredienteRepository := repositories.NewIngredienteRepository(db)
 	// controllers
 	receitaController := controllers.NewReceitaController(receitaRepository)
+	ingredienteController := controllers.NewIngredienteController(ingredienteRepository)
 
 	server.GET("/receita/:receitaID", receitaController.SearchReceita)
 	server.GET("/receita/lista", receitaController.ListReceita)
 	server.POST("/receita/add", receitaController.AddReceita)
+
+	server.GET("/receita/:receitaID", ingredienteController.SearchIngrediente)
+	server.GET("/receita/lista", ingredienteController.ListIngrediente)
+	server.POST("/receita/add", ingredienteController.AddIngrediente)
 }

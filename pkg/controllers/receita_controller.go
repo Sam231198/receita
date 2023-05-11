@@ -15,11 +15,12 @@ type ReceitaController struct {
 }
 
 func NewReceitaController(receitaRepository repository.ReceitaRepository) ReceitaController {
-	return ReceitaController{sv: services.NewReceitaService(receitaRepository)}
+	return ReceitaController{services.NewReceitaService(receitaRepository)}
 }
 
 func (rc ReceitaController) SearchReceita(ctx *gin.Context) {
 	receitaID, err := strconv.Atoi(ctx.Param("receitaID"))
+
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"receitaID": "O valor do parametro não esta correto, deve ser um número inteiro"})
 	}
@@ -36,12 +37,12 @@ func (rc ReceitaController) ListReceita(ctx *gin.Context) {
 func (rc ReceitaController) AddReceita(ctx *gin.Context) {
 	receita := core.Receita{}
 	err := ctx.ShouldBindJSON(&receita)
+
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Não foi possível ler os dados da receita"})
 		return
 	}
 
 	receita = rc.sv.Create(receita)
-
 	ctx.JSON(http.StatusCreated, gin.H{"result": receita})
 }
