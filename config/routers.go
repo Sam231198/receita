@@ -20,7 +20,7 @@ func LoadControllers(server *gin.Engine) {
 	server.GET("/receita/lista", receitaController.ListReceita)
 	server.POST("/receita/add", receitaController.AddReceita)
 
-	server.GET("/receita/:receitaID", ingredienteController.SearchIngrediente)
-	server.GET("/receita/lista", ingredienteController.ListIngrediente)
-	server.POST("/receita/add", ingredienteController.AddIngrediente)
+	server.GET("/ingrediente/:receitaID", ingredienteController.SearchIngrediente)
+	server.GET("/ingrediente/lista", ingredienteController.ListIngrediente)
+	server.POST("/ingrediente/add", ingredienteController.AddIngrediente)
 }
