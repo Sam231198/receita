@@ -46,3 +46,23 @@ func (ic IngredienteController) AddIngrediente(ctx *gin.Context) {
 	ingrediente = ic.si.Create(ingrediente)
 	ctx.JSON(http.StatusCreated, gin.H{"ingrediente": ingrediente})
 }
+
+func (ic IngredienteController) UpdIngrediente(ctx *gin.Context) {
+	ingredienteId, err := strconv.Atoi(ctx.Param("ingredienteID"))
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"receitaID": "O valor do parametro não esta correto, deve ser um número inteiro"})
+	}
+
+	ingrediente := core.Ingrediente{}
+	err = ctx.ShouldBindJSON(&ingrediente)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Não foi possível ler os dados do ingrediente"})
+		return
+	}
+
+	ingrediente.Id = int32(ingredienteId)
+	ingrediente = ic.si.Update(ingrediente)
+	ctx.JSON(http.StatusOK, gin.H{"ingrediente": ingrediente})
+}

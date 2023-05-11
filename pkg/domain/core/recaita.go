@@ -3,8 +3,8 @@ package core
 type Receita struct {
 	Id          int32         `json:"id,omitempty"`
 	Nome        string        `json:"nome"`
-	Tempo       int32         `json:"tempo,omitempty"`
-	Rendimento  string        `json:"rendimento,omitempty"`
+	Tempo       int32         `json:"tempo"`
+	Rendimento  string        `json:"rendimento"`
 	Ingrediente []Ingrediente `json:"ingrediente,omitempty"`
 }
 

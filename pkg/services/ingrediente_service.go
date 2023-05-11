@@ -48,3 +48,15 @@ func (is IngredienteService) Create(ingrediente core.Ingrediente) core.Ingredien
 	ingrediente.Id = id
 	return ingrediente
 }
+
+func (is IngredienteService) Update(ingrediente core.Ingrediente) core.Ingrediente {
+	id, err := is.ingredienteRepository.Update(ingrediente)
+
+	if err != nil {
+		fmt.Print("Error ao retornar os ingredientes do banco de dados: ", err.Error())
+		return core.Ingrediente{}
+	}
+
+	ingrediente.Id = id
+	return ingrediente
+}

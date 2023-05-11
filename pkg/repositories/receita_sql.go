@@ -86,3 +86,17 @@ func (rp ReceitaRepository) Insert(receita core.Receita) (int32, error) {
 
 	return id, nil
 }
+
+func (rp ReceitaRepository) Update(receita core.Receita) (int32, error) {
+	row := rp.db.QueryRow(`UPDATE receitas SET nome = $1, tempo = $2, rendimento = $3 WHERE id = $4 RETURNING id`,
+		receita.Nome, receita.Tempo, receita.Rendimento, receita.Id)
+
+	var id int32
+	err := row.Scan(&id)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return id, nil
+}

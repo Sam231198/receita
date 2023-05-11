@@ -7,4 +7,5 @@ type IngredienteRepository interface {
 	// FetchReceita(idReceita int32) ([]core.Ingrediente, error)
 	FetchAll() ([]core.Ingrediente, error)
 	Insert(core.Ingrediente) (int32, error)
+	Update(core.Ingrediente) (int32, error)
 }

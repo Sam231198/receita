@@ -46,3 +46,23 @@ func (rc ReceitaController) AddReceita(ctx *gin.Context) {
 	receita = rc.sv.Create(receita)
 	ctx.JSON(http.StatusCreated, gin.H{"result": receita})
 }
+
+func (rc ReceitaController) UpdReceita(ctx *gin.Context) {
+	receitaID, err := strconv.Atoi(ctx.Param("receitaID"))
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"receitaID": "O valor do parametro não esta correto, deve ser um número inteiro"})
+	}
+
+	receita := core.Receita{}
+	err = ctx.ShouldBindJSON(&receita)
+	
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Não foi possível ler os dados da receita"})
+		return
+	}
+	
+	receita.Id = int32(receitaID)
+	receita = rc.sv.Update(receita)
+	ctx.JSON(http.StatusOK, gin.H{"result": receita})
+}

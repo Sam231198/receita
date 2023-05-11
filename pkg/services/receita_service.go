@@ -46,3 +46,15 @@ func (rs ReceitaService) Create(receita core.Receita) core.Receita {
 	return receita
 
 }
+
+func (rs ReceitaService) Update(receita core.Receita) core.Receita {
+	id, err := rs.receitaRepository.Update(receita)
+	if err != nil {
+		fmt.Print("A atualização falhou: ", err.Error())
+		return core.Receita{}
+	}
+
+	receita.Id = id
+	return receita
+
+}

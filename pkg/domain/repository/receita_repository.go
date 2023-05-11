@@ -6,4 +6,5 @@ type ReceitaRepository interface {
 	FetchOne(id int32) (core.Receita, error)
 	FetchAll() ([]core.Receita, error)
 	Insert(core.Receita) (int32, error)
+	Update(core.Receita) (int32, error)
 }

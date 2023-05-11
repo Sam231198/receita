@@ -81,3 +81,17 @@ func (ir IngredienteRepository) Insert(ingrediente core.Ingrediente) (int32, err
 
 	return id, nil
 }
+
+func (ir IngredienteRepository) Update(ingrediente core.Ingrediente) (int32, error) {
+	row := ir.db.QueryRow("UPDATE ingredientes SET nome = $1, und_medida = $2 WHERE id = $3 RETURNING id",
+		ingrediente.Nome, ingrediente.UndMedida, ingrediente.Id)
+
+	var id int32
+	err := row.Scan(&id)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return id, nil
+}
