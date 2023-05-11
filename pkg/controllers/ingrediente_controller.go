@@ -36,7 +36,7 @@ func (ic IngredienteController) ListIngrediente(ctx *gin.Context) {
 
 func (ic IngredienteController) AddIngrediente(ctx *gin.Context) {
 	ingrediente := core.Ingrediente{}
-	err := ctx.ShouldBindJSON(ingrediente)
+	err := ctx.ShouldBindJSON(&ingrediente)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Não foi possível ler os dados do ingrediente"})

@@ -69,8 +69,8 @@ func (ir IngredienteRepository) FetchAll() ([]core.Ingrediente, error) {
 }
 
 func (ir IngredienteRepository) Insert(ingrediente core.Ingrediente) (int32, error) {
-	row := ir.db.QueryRow("INSERT INTO ingredientes (nome, qtd, und_medida) VALUES ($1,$2,$3) RETURNING id",
-		ingrediente.Nome, ingrediente.Qtd, ingrediente.UndMedida)
+	row := ir.db.QueryRow("INSERT INTO ingredientes (nome, und_medida) VALUES ($1,$2) RETURNING id",
+		ingrediente.Nome, ingrediente.UndMedida)
 
 	var id int32
 	err := row.Scan(&id)
